@@ -4,11 +4,14 @@ package org.usfirst.frc.team5585.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team5585.robot.commands.*;
-import org.usfirst.frc.team5585.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.Command;
+
+
+import org.usfirst.frc.team5585.robot.commands.*;
+import org.usfirst.frc.team5585.robot.subsystems.*;
+import org.usfirst.frc.team5585.robot.triggers.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,10 +23,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain Drivetrain;
+	public static Lift Lift;
 	public static OI oi;
+	public static LiftActive LiftActive;
 	
 	public Command ArcadeDrive;
 	public Command PreciseDrive;
+	public Command DisableDrive;
+	public Command RunLift;
 	
     SendableChooser chooser;
 
@@ -35,12 +42,16 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 		
 	    Drivetrain = new DriveTrain();
+	    Lift = new Lift();
+	    LiftActive = new LiftActive();
 //        chooser = new SendableChooser();
 //        chooser.addDefault("run Whacker", new RunWhacker());
 //        chooser.addObject("alt", new RunWhacker());
 //        SmartDashboard.putData("Auto mode", chooser);
         oi = new OI();
         oi.preciseDriveButton.whileHeld(new PreciseDrive());
+        oi.liftButton.toggleWhenActive(new RunLift());
+        LiftActive.whileActive(new DisableDrive());
     }
 	
 	/**
