@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Servo;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -24,6 +25,8 @@ public class RobotMap {
 	//drivetrain
 	public static SpeedController frontLeftDriveMotor, frontRightDriveMotor, rearLeftDriveMotor, rearRightDriveMotor;
 	public static RobotDrive drivetrain;
+	//CameraGimble
+	public static Servo Xservo, Yservo;
 	
 	public static void init() {
 		//lift
@@ -47,6 +50,13 @@ public class RobotMap {
         LiveWindow.addActuator("drivetrain", "rear right drive motor", (Talon) rearRightDriveMotor);
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
+        
+        //CameraGimble
+        Xservo = new Servo(5);
+        LiveWindow.addActuator("Camera servo", "X", Xservo);
+        
+        Yservo = new Servo(6);
+        LiveWindow.addActuator("Camera servo", "Y", Yservo);
 	}
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5585.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain Drivetrain;
 	public static Lift Lift;
+	public static CameraGimble Gimble;
 	public static OI oi;
 	public static LiftActive LiftActive;
 	
@@ -31,8 +33,12 @@ public class Robot extends IterativeRobot {
 	public Command PreciseDrive;
 	public Command DisableDrive;
 	public Command RunLift;
+	public Command aimCamera;
+	public Command changeCameraDirection;
 	
     SendableChooser chooser;
+    
+    public CameraServer server;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -43,6 +49,7 @@ public class Robot extends IterativeRobot {
 		
 	    Drivetrain = new DriveTrain();
 	    Lift = new Lift();
+	    Gimble = new CameraGimble();
 	    LiftActive = new LiftActive();
 //        chooser = new SendableChooser();
 //        chooser.addDefault("run Whacker", new RunWhacker());
@@ -52,6 +59,13 @@ public class Robot extends IterativeRobot {
         oi.preciseDriveButton.whileHeld(new PreciseDrive());
         oi.liftButton.toggleWhenActive(new RunLift());
         LiftActive.whileActive(new DisableDrive());
+        server = CameraServer.getInstance();
+        server.setQuality(50);
+        //the camera name (ex "cam0") can be found through the roborio web interface
+        server.startAutomaticCapture("cam0");
+        server.startAutomaticCapture("cam1");
+        
+        
     }
 	
 	/**
