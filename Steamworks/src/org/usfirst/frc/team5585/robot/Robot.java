@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team5585.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
+import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,10 +35,11 @@ public class Robot extends IterativeRobot {
 	public Command RunLift;
 	public Command aimCamera;
 	public Command changeCameraDirection;
+	public Command switchCamera;
 	
     SendableChooser chooser;
     
-    public CameraServer server;
+    public static BetterCameraServer server;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -51,19 +52,18 @@ public class Robot extends IterativeRobot {
 	    Lift = new Lift();
 	    Gimble = new CameraGimble();
 	    LiftActive = new LiftActive();
+	    BetterCameraServer.init("cam0", "cam1");
+        BetterCameraServer.start();
 //        chooser = new SendableChooser();
 //        chooser.addDefault("run Whacker", new RunWhacker());
 //        chooser.addObject("alt", new RunWhacker());
 //        SmartDashboard.putData("Auto mode", chooser);
         oi = new OI();
-        oi.preciseDriveButton.whileHeld(new PreciseDrive());
+        oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftButton.toggleWhenActive(new RunLift());
+        oi.cameraButton.whenReleased(new switchCamera());
+        oi.stopButton.whenPressed(new DisableDrive());
         LiftActive.whileActive(new DisableDrive());
-        server = CameraServer.getInstance();
-        server.setQuality(50);
-        //the camera name (ex "cam0") can be found through the roborio web interface
-        server.startAutomaticCapture("cam0");
-        server.startAutomaticCapture("cam1");
         
         
     }

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5585.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -33,21 +33,21 @@ public class RobotMap {
         liftSW = new DigitalInput(1);
         LiveWindow.addSensor("Lift", "liftSW", liftSW);
         
-        liftMotor = new Jaguar(0);
-        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (Jaguar) liftMotor);
+        liftMotor = new VictorSP(4);
+        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
         
         //drivetrain
-        frontLeftDriveMotor = new Talon(1);
-        LiveWindow.addActuator("drivetrain", "front left drive motor", (Talon) frontLeftDriveMotor);
+        frontLeftDriveMotor = new Victor(3);
+        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
         
-        frontRightDriveMotor = new Talon(2);
-        LiveWindow.addActuator("drivetrain", "front right drive motor", (Talon) frontRightDriveMotor);
+        frontRightDriveMotor = new Victor(1);
+        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
         
-        rearLeftDriveMotor = new Talon(3);
-        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Talon) rearLeftDriveMotor);
+        rearLeftDriveMotor = new Victor(2);
+        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
         
-        rearRightDriveMotor = new Talon(4);
-        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Talon) rearRightDriveMotor);
+        rearRightDriveMotor = new Victor(0);
+        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
         

@@ -19,14 +19,16 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive() {
-    	drivetrain.arcadeDrive(OI.joystick);
+    	double x = OI.joystick.getX() * -0.85;
+    	double y = OI.joystick.getY() * -0.85;
+    	drivetrain.arcadeDrive(y, x);
     }
     
     public void preciseDrive() {
     	//drive at 50% power
-    	double x = OI.joystick.getX() / 2;
-    	double y = OI.joystick.getY() / 2;
-    	drivetrain.arcadeDrive(x, y);
+    	double x = OI.joystick.getX() / -2.5;
+    	double y = OI.joystick.getY() / -2.5;
+    	drivetrain.arcadeDrive(y, x);
     }
     
     public void stop() {

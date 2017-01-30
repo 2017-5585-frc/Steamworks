@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public static Joystick joystick, xbox;
 	
-    public Button liftButton, preciseDriveButton;
+    public Button liftButton, preciseDriveButton, cameraButton, stopButton;
     
     
     public OI() {
@@ -20,6 +20,9 @@ public class OI {
         
     	liftButton = new JoystickButton(joystick, 12);
     	preciseDriveButton = new JoystickButton(joystick,1);
+    	cameraButton = new JoystickButton(joystick,7);
+    	stopButton = new JoystickButton(joystick,8);
+    	
     	
 //        SmartDashboard.putData("RunWhacker", new RunWhacker());
     }
