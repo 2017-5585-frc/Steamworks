@@ -11,17 +11,18 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public static Joystick joystick, xbox;
 	
-    public Button liftButton, preciseDriveButton, cameraButton, stopButton;
+    public Button liftOnButton, liftOffButton, preciseDriveButton, cameraButton, stopButton;
     
     
     public OI() {
         joystick = new Joystick(RobotMap.joystickPort);
         xbox = new Joystick(RobotMap.xboxport);
         
-    	liftButton = new JoystickButton(joystick, 12);
+    	liftOnButton = new JoystickButton(xbox, 5);
+    	liftOffButton = new JoystickButton(xbox, 6);
     	preciseDriveButton = new JoystickButton(joystick,1);
     	cameraButton = new JoystickButton(joystick,7);
-    	stopButton = new JoystickButton(joystick,8);
+    	stopButton = new JoystickButton(joystick,2);
     	
     	
 //        SmartDashboard.putData("RunWhacker", new RunWhacker());

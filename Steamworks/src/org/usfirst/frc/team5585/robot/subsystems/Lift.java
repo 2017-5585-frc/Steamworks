@@ -21,8 +21,8 @@ public class Lift extends Subsystem {
 	public boolean active = false;
 	
 	public void opControl() {
-		double speed = OI.xbox.getX();
-		liftMotor.set(speed);
+		double speed = OI.xbox.getY() * 0.5;
+		liftMotor.set(speed-0.5);
 	}
 	
 	public void stop() {

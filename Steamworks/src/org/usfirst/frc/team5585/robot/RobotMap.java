@@ -31,23 +31,24 @@ public class RobotMap {
 	public static void init() {
 		//lift
         liftSW = new DigitalInput(1);
-        LiveWindow.addSensor("Lift", "liftSW", liftSW);
+//        LiveWindow.addSensor("Lift", "liftSW", liftSW);
         
         liftMotor = new VictorSP(4);
-        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
+        liftMotor.setInverted(false);
+//        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
         
         //drivetrain
         frontLeftDriveMotor = new Victor(3);
-        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
         
         frontRightDriveMotor = new Victor(1);
-        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
         
         rearLeftDriveMotor = new Victor(2);
-        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
         
         rearRightDriveMotor = new Victor(0);
-        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
         

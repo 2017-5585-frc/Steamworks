@@ -26,14 +26,15 @@ public class RunLift extends Command {
     		Robot.Lift.opControl();
     	}
     	else {
-    		Robot.Lift.stop();
+    		Robot.Lift.opControl();
+//    		Robot.Lift.stop();
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if(Robot.Lift.liftSW.get()) {
-        	return true;
+        	return false;
         }
         else {
         	return false;

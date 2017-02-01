@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public Command changeCameraDirection;
 	public Command switchCamera;
 	
-    SendableChooser chooser;
+    SendableChooser auto;
     
     public static BetterCameraServer server;
 
@@ -54,16 +54,17 @@ public class Robot extends IterativeRobot {
 	    LiftActive = new LiftActive();
 	    BetterCameraServer.init("cam0", "cam1");
         BetterCameraServer.start();
-//        chooser = new SendableChooser();
-//        chooser.addDefault("run Whacker", new RunWhacker());
-//        chooser.addObject("alt", new RunWhacker());
+//        auto = new SendableChooser();
+//        auto.addDefault("left", new RunWhacker());
+//        auto.addObject("right", new RunWhacker());
+//        auto.addObject("center", new RunWhacker());
 //        SmartDashboard.putData("Auto mode", chooser);
         oi = new OI();
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
-        oi.liftButton.toggleWhenActive(new RunLift());
+        oi.liftOnButton.toggleWhenActive(new RunLift());
         oi.cameraButton.whenReleased(new switchCamera());
         oi.stopButton.whenPressed(new DisableDrive());
-        LiftActive.whileActive(new DisableDrive());
+//        LiftActive.whileActive(new DisableDrive());
         
         
     }
