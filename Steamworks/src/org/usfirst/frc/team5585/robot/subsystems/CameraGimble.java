@@ -1,15 +1,18 @@
 package org.usfirst.frc.team5585.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Servo;
-
-
 import org.usfirst.frc.team5585.robot.OI;
 import org.usfirst.frc.team5585.robot.RobotMap;
 import org.usfirst.frc.team5585.robot.commands.aimCamera;
 
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 /**
- *
+ *subsystem for controlling experimental camera gimble. due for removal.
+ * @since 2/7/2017
+ * @author Ian Bolin 
+ * @category subsytem
+ * @category Unused
  */
 public class CameraGimble extends Subsystem {
     

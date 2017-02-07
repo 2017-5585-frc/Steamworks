@@ -1,7 +1,5 @@
 package org.usfirst.frc.team5585.robot;
 
-import org.usfirst.frc.team5585.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Timer;
 
 public class AutonomousVars {

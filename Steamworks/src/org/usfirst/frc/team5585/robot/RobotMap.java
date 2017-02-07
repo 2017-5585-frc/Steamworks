@@ -2,12 +2,12 @@ package org.usfirst.frc.team5585.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

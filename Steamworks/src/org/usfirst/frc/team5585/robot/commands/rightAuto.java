@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CenterAuto extends CommandGroup {
+public class rightAuto extends CommandGroup {
     
-    public  CenterAuto() {
+    public  rightAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,7 +24,11 @@ public class CenterAuto extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new score_forward());
-    	addSequential(new score_reverse());
+    	addSequential(new autoDrive());
+    	addSequential(new turnLeft());
+    	addSequential(new score());
+    	addSequential(new turnRight());
+    	addSequential(new autoDrive());
+    	
     }
 }

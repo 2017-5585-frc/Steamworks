@@ -2,18 +2,27 @@
 package org.usfirst.frc.team5585.robot;
 
 
+import org.usfirst.frc.team5585.robot.commands.CenterAuto;
+import org.usfirst.frc.team5585.robot.commands.DisableDrive;
+import org.usfirst.frc.team5585.robot.commands.PreciseDrive;
+import org.usfirst.frc.team5585.robot.commands.RunLift;
+import org.usfirst.frc.team5585.robot.commands.baselineAuto;
+import org.usfirst.frc.team5585.robot.commands.leftAuto;
+import org.usfirst.frc.team5585.robot.commands.rightAuto;
+import org.usfirst.frc.team5585.robot.commands.switchCamera;
+import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
+import org.usfirst.frc.team5585.robot.subsystems.CameraGimble;
+import org.usfirst.frc.team5585.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5585.robot.subsystems.Lift;
+import org.usfirst.frc.team5585.robot.triggers.LiftActive;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
-import org.usfirst.frc.team5585.robot.commands.*;
-import org.usfirst.frc.team5585.robot.subsystems.*;
-import org.usfirst.frc.team5585.robot.triggers.*;
-import org.usfirst.frc.team5585.robot.AutonomousVars;
-import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,6 +53,9 @@ public class Robot extends IterativeRobot {
 	public Command changeCameraDirection;
 	public Command switchCamera;
 	public Command leftAuto;
+	public Command CenterAuto;
+	public Command rightAuto;
+	public Command baselineAuto;
 	
     SendableChooser auto;
     
@@ -64,18 +76,24 @@ public class Robot extends IterativeRobot {
 	    pdp = new PowerDistributionPanel();
 	    BetterCameraServer.init("cam0", "cam1");
         BetterCameraServer.start();
-//        auto = new SendableChooser();
-//        auto.addDefault("left", new leftAuto());
-//        auto.addObject("right", new rightAuto());
-//        auto.addObject("center", new centerAuto());
-//        auto.addObject("baseline", new baselineAuto());
-//        SmartDashboard.putData("Autonomous program", auto);
+        auto = new SendableChooser();
+        auto.addDefault("left", new leftAuto());
+        auto.addObject("right", new rightAuto());
+        auto.addObject("center", new CenterAuto());
+        auto.addObject("baseline", new baselineAuto());
+        SmartDashboard.putData("Autonomous program", auto);
         oi = new OI();
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftOnButton.toggleWhenActive(new RunLift());
         oi.cameraButton.whenReleased(new switchCamera());
         oi.stopButton.whenPressed(new DisableDrive());
-        dashboard.run();
+        SmartDashboard.putData(Scheduler.getInstance());
+		SmartDashboard.putData(Robot.Drivetrain);
+		SmartDashboard.putData(Robot.Lift);
+		SmartDashboard.putString("Camera Direction:", "Forward");
+		SmartDashboard.putNumber("range:", RobotMap.rangeFinder.getValue()/120);
+		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
+		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
 //        LiftActive.whileActive(new DisableDrive());
         
         
@@ -105,17 +123,16 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         //autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new RunWhacker();
-			break;
-		} */
+//        
+//		 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+//		switch(autoSelected) {
+//		case "My Auto":
+//			autonomousCommand = new MyAutoCommand();
+//			break;
+//		case "Default Auto":
+//		default:
+//			break;
+//		} 
     	
     	// schedule the autonomous command (example)
         //if (autonomousCommand != null) autonomousCommand.start();
