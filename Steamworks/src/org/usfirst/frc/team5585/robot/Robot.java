@@ -1,18 +1,19 @@
 
 package org.usfirst.frc.team5585.robot;
 
-import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 import org.usfirst.frc.team5585.robot.commands.*;
 import org.usfirst.frc.team5585.robot.subsystems.*;
 import org.usfirst.frc.team5585.robot.triggers.*;
+import org.usfirst.frc.team5585.robot.AutonomousVars;
+import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,12 +23,18 @@ import org.usfirst.frc.team5585.robot.triggers.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
 
 	public static DriveTrain Drivetrain;
 	public static Lift Lift;
 	public static CameraGimble Gimble;
 	public static OI oi;
 	public static LiftActive LiftActive;
+	
+	public static PowerDistributionPanel pdp;
+	
+	public static Dashboard dashboard;
+	public static AutonomousVars autoVars;
 	
 	public Command ArcadeDrive;
 	public Command PreciseDrive;
@@ -36,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public Command aimCamera;
 	public Command changeCameraDirection;
 	public Command switchCamera;
+	public Command leftAuto;
 	
     SendableChooser auto;
     
@@ -47,23 +55,27 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		RobotMap.init();
-		
+		autoVars = new AutonomousVars();
 	    Drivetrain = new DriveTrain();
 	    Lift = new Lift();
 	    Gimble = new CameraGimble();
 	    LiftActive = new LiftActive();
+	    
+	    pdp = new PowerDistributionPanel();
 	    BetterCameraServer.init("cam0", "cam1");
         BetterCameraServer.start();
 //        auto = new SendableChooser();
-//        auto.addDefault("left", new RunWhacker());
-//        auto.addObject("right", new RunWhacker());
-//        auto.addObject("center", new RunWhacker());
-//        SmartDashboard.putData("Auto mode", chooser);
+//        auto.addDefault("left", new leftAuto());
+//        auto.addObject("right", new rightAuto());
+//        auto.addObject("center", new centerAuto());
+//        auto.addObject("baseline", new baselineAuto());
+//        SmartDashboard.putData("Autonomous program", auto);
         oi = new OI();
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftOnButton.toggleWhenActive(new RunLift());
         oi.cameraButton.whenReleased(new switchCamera());
         oi.stopButton.whenPressed(new DisableDrive());
+        dashboard.run();
 //        LiftActive.whileActive(new DisableDrive());
         
         

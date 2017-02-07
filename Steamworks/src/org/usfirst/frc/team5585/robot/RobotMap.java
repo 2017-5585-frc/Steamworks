@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5585.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.Victor;
@@ -28,9 +29,12 @@ public class RobotMap {
 	//CameraGimble
 	public static Servo Xservo, Yservo;
 	
+	public static AnalogInput rangeFinder;
+	
 	public static void init() {
 		//lift
         liftSW = new DigitalInput(1);
+
 //        LiveWindow.addSensor("Lift", "liftSW", liftSW);
         
         liftMotor = new VictorSP(4);
@@ -58,6 +62,9 @@ public class RobotMap {
         
         Yservo = new Servo(6);
         LiveWindow.addActuator("Camera servo", "Y", Yservo);
+        
+        rangeFinder = new AnalogInput(0);
+        
 	}
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.

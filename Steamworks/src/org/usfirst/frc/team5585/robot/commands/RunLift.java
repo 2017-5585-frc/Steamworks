@@ -22,12 +22,12 @@ public class RunLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.Lift.liftSW.get()) {
+    	if (Robot.Lift.liftSW.get() == false) {
     		Robot.Lift.opControl();
     	}
     	else {
-    		Robot.Lift.opControl();
-//    		Robot.Lift.stop();
+//    		Robot.Lift.opControl();
+    		Robot.Lift.stop();
     	}
     }
 
