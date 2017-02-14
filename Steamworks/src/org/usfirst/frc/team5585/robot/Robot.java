@@ -138,7 +138,6 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         autoCommand = (Command) auto.getSelected();
-        new autoCommand();
 //		 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 //		switch(autoSelected) {
 //		case "My Auto":
@@ -147,10 +146,10 @@ public class Robot extends IterativeRobot {
 //		case "Default Auto":
 //		default:
 //			break;
-		} 
+//		} 
     	
     	// schedule the autonomous command (example)
-        //if (autonomousCommand != null) autonomousCommand.start();
+        if (autoCommand != null) autoCommand.start();
     }
 
     /**
