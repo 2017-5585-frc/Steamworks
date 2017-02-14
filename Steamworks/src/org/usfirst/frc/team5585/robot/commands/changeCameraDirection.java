@@ -30,6 +30,7 @@ public class changeCameraDirection extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.Gimble.setDirection();
+    	Robot.dashboard.camera();
     }
 
     // Called when another command which requires one or more of the same

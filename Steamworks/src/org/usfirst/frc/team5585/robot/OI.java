@@ -11,20 +11,20 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public static Joystick joystick, xbox;
 	
-    public Button liftButton, preciseDriveButton, cameraButton, stopButton;
+    public Button liftOnButton, liftOffButton, preciseDriveButton, cameraButton, stopButton;
     
     
     public OI() {
         joystick = new Joystick(RobotMap.joystickPort);
         xbox = new Joystick(RobotMap.xboxport);
         
-    	liftButton = new JoystickButton(joystick, 12);
+    	liftOnButton = new JoystickButton(xbox, 5);
+    	liftOffButton = new JoystickButton(xbox, 6);
     	preciseDriveButton = new JoystickButton(joystick,1);
     	cameraButton = new JoystickButton(joystick,7);
-    	stopButton = new JoystickButton(joystick,8);
+    	stopButton = new JoystickButton(joystick,2);
     	
     	
-//        SmartDashboard.putData("RunWhacker", new RunWhacker());
     }
 }
     //// CREATING BUTTONS
@@ -44,13 +44,13 @@ public class OI {
     
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new RunWhacker());
+
     
     // Run the command while the button is being held down and interrupt it once
     // the button is released.
-    // button.whileHeld(new RunWhacker());
+
     
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new RunWhacker());
+
 

@@ -2,6 +2,7 @@ package org.usfirst.frc.team5585.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
+import org.usfirst.frc.team5585.robot.Robot;
 
 /**
  *
@@ -29,10 +30,12 @@ public class switchCamera extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.camera();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

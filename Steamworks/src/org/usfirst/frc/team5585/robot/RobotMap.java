@@ -1,12 +1,13 @@
 package org.usfirst.frc.team5585.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -28,26 +29,30 @@ public class RobotMap {
 	//CameraGimble
 	public static Servo Xservo, Yservo;
 	
+	public static AnalogInput rangeFinder;
+	
 	public static void init() {
 		//lift
         liftSW = new DigitalInput(1);
-        LiveWindow.addSensor("Lift", "liftSW", liftSW);
+
+//        LiveWindow.addSensor("Lift", "liftSW", liftSW);
         
         liftMotor = new VictorSP(4);
-        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
+        liftMotor.setInverted(false);
+//        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
         
         //drivetrain
         frontLeftDriveMotor = new Victor(3);
-        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
         
         frontRightDriveMotor = new Victor(1);
-        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
         
         rearLeftDriveMotor = new Victor(2);
-        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
         
         rearRightDriveMotor = new Victor(0);
-        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
+//        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
         
@@ -57,6 +62,9 @@ public class RobotMap {
         
         Yservo = new Servo(6);
         LiveWindow.addActuator("Camera servo", "Y", Yservo);
+        
+        rangeFinder = new AnalogInput(0);
+        
 	}
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.

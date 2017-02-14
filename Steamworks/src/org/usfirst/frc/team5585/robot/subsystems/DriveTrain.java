@@ -2,14 +2,19 @@ package org.usfirst.frc.team5585.robot.subsystems;
 
 import org.usfirst.frc.team5585.robot.OI;
 import org.usfirst.frc.team5585.robot.RobotMap;
-import org.usfirst.frc.team5585.robot.commands.*;
+import org.usfirst.frc.team5585.robot.commands.ArcadeDrive;
 
-
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *Drivetrain subsystem
+ * @since 2/7/2017
+ * @author Ian Bolin
+ * @category subsystem
+ * @see #arcadeDrive()
+ * @see #manual(double, double)
+ * @see 
  */
 public class DriveTrain extends Subsystem {
     private RobotDrive drivetrain = RobotMap.drivetrain;
@@ -19,16 +24,24 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDrive() {
-    	double x = OI.joystick.getX() * -0.85;
-    	double y = OI.joystick.getY() * -0.85;
+    /*
+     * default arcade drive method
+     */
+    	double speed = OI.joystick.getThrottle() * -0.1 + 0.9;
+    	double x = OI.joystick.getX() * -speed;
+    	double y = OI.joystick.getY() * -speed;
     	drivetrain.arcadeDrive(y, x);
     }
     
     public void preciseDrive() {
     	//drive at 50% power
-    	double x = OI.joystick.getX() / -2.5;
-    	double y = OI.joystick.getY() / -2.5;
+    	double x = OI.joystick.getX() / -2;
+    	double y = OI.joystick.getY() / -2;
     	drivetrain.arcadeDrive(y, x);
+    }
+    
+    public void manual(double x, double y) {
+    	drivetrain.arcadeDrive(y,x);
     }
     
     public void stop() {

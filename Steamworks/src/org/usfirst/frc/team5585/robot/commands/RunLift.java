@@ -22,10 +22,11 @@ public class RunLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.Lift.liftSW.get()) {
+    	if (Robot.Lift.liftSW.get() == true) {
     		Robot.Lift.opControl();
     	}
     	else {
+//    		Robot.Lift.opControl();
     		Robot.Lift.stop();
     	}
     }
@@ -33,7 +34,7 @@ public class RunLift extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if(Robot.Lift.liftSW.get()) {
-        	return true;
+        	return false;
         }
         else {
         	return false;
