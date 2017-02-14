@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
 	public Command CenterAuto;
 	public Command rightAuto;
 	public Command baselineAuto;
+	public Command autoCommand;
 	
     SendableChooser auto;
     
@@ -91,14 +92,28 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(Robot.Drivetrain);
 		SmartDashboard.putData(Robot.Lift);
 		SmartDashboard.putString("Camera Direction:", "Forward");
-		SmartDashboard.putNumber("range:", RobotMap.rangeFinder.getValue()/120);
-		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
-		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
+		dashboard();
 //        LiftActive.whileActive(new DisableDrive());
         
         
     }
 	
+    public void dashboard() {
+    	SmartDashboard.putNumber("range:", autoVars.getRange());
+		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
+		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
+    }
+    
+    public static void camera() {
+		String Direction = SmartDashboard.getString("Camera Direction", "Forward");
+		if (Direction == "Forward") {
+			SmartDashboard.putString("Camera Direction:", "Reverse");
+		}
+		else {
+			SmartDashboard.putString("Camera Direction:", "Forward");
+		}
+	}
+
 	/**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
@@ -122,8 +137,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        //autonomousCommand = (Command) chooser.getSelected();
-//        
+        autoCommand = (Command) auto.getSelected();
+        new autoCommand();
 //		 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 //		switch(autoSelected) {
 //		case "My Auto":
@@ -132,7 +147,7 @@ public class Robot extends IterativeRobot {
 //		case "Default Auto":
 //		default:
 //			break;
-//		} 
+		} 
     	
     	// schedule the autonomous command (example)
         //if (autonomousCommand != null) autonomousCommand.start();
@@ -161,6 +176,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        dashboard();
         
 
     }

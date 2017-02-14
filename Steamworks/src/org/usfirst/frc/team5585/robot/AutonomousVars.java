@@ -85,7 +85,7 @@ public class AutonomousVars {
 	}
 	
 	public double getRange() {
-		range = RobotMap.rangeFinder.getValue() / 120;
+		range = RobotMap.rangeFinder.getAverageVoltage() * 89.17;
 		return range;
 	}
 	

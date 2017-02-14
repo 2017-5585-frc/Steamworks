@@ -10,7 +10,7 @@ public class Dashboard {
 		SmartDashboard.putData(Robot.Drivetrain);
 		SmartDashboard.putData(Robot.Lift);
 		SmartDashboard.putString("Camera Direction:", "Forward");
-		SmartDashboard.putNumber("range:", RobotMap.rangeFinder.getValue()/120);
+		SmartDashboard.putDouble("range:", RobotMap.rangeFinder.getAverageVoltage() * 512 * 0.39);
 		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
 		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
 

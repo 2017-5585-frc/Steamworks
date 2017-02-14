@@ -1,39 +1,39 @@
 <xml version="1.0">
 <dashboard>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
-		<location x="1354" y="265"/>
-		<width>976</width>
-		<height>925</height>
+		<location x="1351350" y="265"/>
+		<width>1000</width>
+		<height>1000</height>
 	</static-widget>
 	<widget field="Scheduler" type="Scheduler" class="edu.wpi.first.smartdashboard.gui.elements.Scheduler">
-		<location x="1130" y="529"/>
+		<location x="1130" y="530"/>
 	</widget>
 	<widget field="Autonomous program" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
-		<location x="1167" y="734"/>
+		<location x="1170" y="730"/>
 	</widget>
 	<widget field="DriveTrain" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
-		<location x="1079" y="339"/>
+		<location x="1080" y="340"/>
 	</widget>
 	<widget field="Lift" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
-		<location x="1129" y="369"/>
+		<location x="1130" y="370"/>
 	</widget>
 	<widget field="Voltage:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="108" y="383"/>
+		<location x="100" y="380"/>
 	</widget>
 	<widget field="Camera Direction:" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="1738" y="1115"/>
-		<width>203</width>
-		<height>39</height>
+		<location x="1750" y="1100"/>
+		<width>200</width>
+		<height>40</height>
 	</widget>
 	<widget field="range:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="108" y="550"/>
+		<location x="100" y="550"/>
 	</widget>
 	<widget field="Current:" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="108" y="356"/>
+		<location x="100" y="350"/>
 	</widget>
 </dashboard>
+
 <live-window>
 </live-window>
-	<hidden field="RunWhacker"/>
-	<hidden field="Auto mode"/>
+
 </xml>
