@@ -9,8 +9,8 @@ import org.usfirst.frc.team5585.robot.commands.RunLift;
 import org.usfirst.frc.team5585.robot.commands.baselineAuto;
 import org.usfirst.frc.team5585.robot.commands.leftAuto;
 import org.usfirst.frc.team5585.robot.commands.rightAuto;
-import org.usfirst.frc.team5585.robot.commands.switchCamera;
-import org.usfirst.frc.team5585.robot.from2839.BetterCameraServer;
+import org.usfirst.frc.team5585.robot.commands.switchCameraToFront;
+import org.usfirst.frc.team5585.robot.Server17;
 import org.usfirst.frc.team5585.robot.subsystems.CameraGimble;
 import org.usfirst.frc.team5585.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5585.robot.subsystems.Lift;
@@ -60,7 +60,7 @@ public class Robot extends IterativeRobot {
 	
     SendableChooser auto;
     
-    public static BetterCameraServer server;
+    public static Server17 server;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -75,8 +75,8 @@ public class Robot extends IterativeRobot {
 	    LiftActive = new LiftActive();
 	    
 	    pdp = new PowerDistributionPanel();
-	    BetterCameraServer.init("cam0", "cam1");
-        BetterCameraServer.start();
+	    server.init();
+        server.start();
         auto = new SendableChooser();
         auto.addDefault("left", new leftAuto());
         auto.addObject("right", new rightAuto());
@@ -86,7 +86,7 @@ public class Robot extends IterativeRobot {
         oi = new OI();
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftOnButton.toggleWhenActive(new RunLift());
-        oi.cameraButton.whenReleased(new switchCamera());
+        oi.cameraButton.whenReleased(new switchCameraToFront());
         oi.stopButton.whenPressed(new DisableDrive());
         SmartDashboard.putData(Scheduler.getInstance());
 		SmartDashboard.putData(Robot.Drivetrain);
