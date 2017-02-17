@@ -2,20 +2,13 @@
 package org.usfirst.frc.team5585.robot;
 
 
-import org.usfirst.frc.team5585.robot.commands.CenterAuto;
-import org.usfirst.frc.team5585.robot.commands.DisableDrive;
-import org.usfirst.frc.team5585.robot.commands.PreciseDrive;
-import org.usfirst.frc.team5585.robot.commands.RunLift;
-import org.usfirst.frc.team5585.robot.commands.baselineAuto;
-import org.usfirst.frc.team5585.robot.commands.leftAuto;
-import org.usfirst.frc.team5585.robot.commands.rightAuto;
-import org.usfirst.frc.team5585.robot.commands.switchCameraToFront;
-import org.usfirst.frc.team5585.robot.Server17;
-import org.usfirst.frc.team5585.robot.subsystems.CameraGimble;
-import org.usfirst.frc.team5585.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5585.robot.subsystems.Lift;
+import org.usfirst.frc.team5585.robot.commands.*;
+//import org.usfirst.frc.team5585.robot.Server17;
+import org.usfirst.frc.team5585.robot.subsystems.*;
 import org.usfirst.frc.team5585.robot.triggers.LiftActive;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public Command DisableDrive;
 	public Command RunLift;
 	public Command aimCamera;
-	public Command changeCameraDirection;
+	public Command switchCameraToFront, switchCameraToRear;
 	public Command switchCamera;
 	public Command leftAuto;
 	public Command CenterAuto;
@@ -58,9 +51,12 @@ public class Robot extends IterativeRobot {
 	public Command baselineAuto;
 	public Command autoCommand;
 	
+	private static CameraServer server;
+	private static UsbCamera front, rear, current;
+	
     SendableChooser auto;
     
-    public static Server17 server;
+//    public static Server17 server;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -75,29 +71,66 @@ public class Robot extends IterativeRobot {
 	    LiftActive = new LiftActive();
 	    
 	    pdp = new PowerDistributionPanel();
-	    server.init();
-        server.start();
+//	    CameraServer.getInstance().startAutomaticCapture();
+//	    CameraServer.getInstance().startAutomaticCapture(1);
+//	    Server17.init();
+//        Server17.start();
         auto = new SendableChooser();
-        auto.addDefault("left", new leftAuto());
-        auto.addObject("right", new rightAuto());
-        auto.addObject("center", new CenterAuto());
+        auto.addDefault("center", new CenterAuto());
+//        auto.addObject("left", new leftAuto());
+//        auto.addObject("right", new rightAuto());
         auto.addObject("baseline", new baselineAuto());
         SmartDashboard.putData("Autonomous program", auto);
         oi = new OI();
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftOnButton.toggleWhenActive(new RunLift());
-        oi.cameraButton.whenReleased(new switchCameraToFront());
+        oi.frontCameraButton.whenReleased(new switchCameraToFront());
+        oi.rearCameraButton.whenReleased(new switchCameraToRear());
         oi.stopButton.whenPressed(new DisableDrive());
         SmartDashboard.putData(Scheduler.getInstance());
 		SmartDashboard.putData(Robot.Drivetrain);
 		SmartDashboard.putData(Robot.Lift);
 		SmartDashboard.putString("Camera Direction:", "Forward");
 		dashboard();
+		camInit();
+		start();
 //        LiftActive.whileActive(new DisableDrive());
         
         
     }
-	
+    
+    public static void camInit() {
+		server = CameraServer.getInstance();
+		System.out.println("created server");
+		front = new UsbCamera("cam0", "/dev/video0");
+		rear = new UsbCamera("cam1", "/dev/video1");
+		current = front;
+		System.out.println("created cam0, cam1; set current cam to 0");
+		server.addCamera(front);
+		server.addCamera(rear);
+		System.out.println("added cameras to server");
+    }
+    
+    public static void start() {
+		server.startAutomaticCapture(current);
+	}
+    
+    public static void changeCameraTo(String cam) {
+		if (cam == "front") {
+			rear.free();
+			rear = new UsbCamera("cam1", "/dev/video1");
+			front = new UsbCamera("cam0", "/dev/video0");
+			current = front;
+		}
+		if (cam == "rear") {
+			front.free();
+			front = new UsbCamera("cam1", "/dev/video0");
+			rear = new UsbCamera("cam0", "/dev/video1");
+			current = rear;
+		}
+		start();
+	}
+    
     public void dashboard() {
     	SmartDashboard.putNumber("range:", autoVars.getRange());
 		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());

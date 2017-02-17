@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public static Joystick joystick, xbox;
 	
-    public Button liftOnButton, liftOffButton, preciseDriveButton, cameraButton, stopButton;
+    public Button liftOnButton, liftOffButton, preciseDriveButton, frontCameraButton, rearCameraButton, stopButton;
     
     
     public OI() {
@@ -21,7 +21,8 @@ public class OI {
     	liftOnButton = new JoystickButton(xbox, 5);
     	liftOffButton = new JoystickButton(xbox, 6);
     	preciseDriveButton = new JoystickButton(joystick,1);
-    	cameraButton = new JoystickButton(joystick,7);
+    	frontCameraButton = new JoystickButton(joystick,7);
+    	rearCameraButton = new JoystickButton(joystick,8);
     	stopButton = new JoystickButton(joystick,2);
     	
     	

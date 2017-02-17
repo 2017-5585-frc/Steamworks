@@ -28,7 +28,7 @@ public class autoDrive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.autoVars.getTimeRemaining(2) <= 0) {
+    	if (Robot.autoVars.getTimeRemaining(1) <= 0) {
     		return true;
     	}
     	else {

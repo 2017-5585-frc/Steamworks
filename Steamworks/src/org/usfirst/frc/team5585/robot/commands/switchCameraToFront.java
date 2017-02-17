@@ -16,7 +16,7 @@ public class switchCameraToFront extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Server17.changeCameraTo("front");
+    	Robot.changeCameraTo("front");
     }
 
     // Called repeatedly when this Command is scheduled to run
