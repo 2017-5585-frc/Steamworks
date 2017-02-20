@@ -3,12 +3,12 @@ package org.usfirst.frc.team5585.robot;
 
 
 import org.usfirst.frc.team5585.robot.commands.*;
-//import org.usfirst.frc.team5585.robot.Server17;
+import org.usfirst.frc.team5585.robot.Server17;
 import org.usfirst.frc.team5585.robot.subsystems.*;
 import org.usfirst.frc.team5585.robot.triggers.LiftActive;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -51,12 +51,14 @@ public class Robot extends IterativeRobot {
 	public Command baselineAuto;
 	public Command autoCommand;
 	
-	private static CameraServer server;
-	private static UsbCamera front, rear, current;
+	public static Server17 server;
+	
+//	private static CameraServer camServer;
+//	private static UsbCamera front, rear, current;
 	
     SendableChooser auto;
     
-//    public static Server17 server;
+//    public static Server17 camServer;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -73,8 +75,7 @@ public class Robot extends IterativeRobot {
 	    pdp = new PowerDistributionPanel();
 //	    CameraServer.getInstance().startAutomaticCapture();
 //	    CameraServer.getInstance().startAutomaticCapture(1);
-//	    Server17.init();
-//        Server17.start();
+	    Server17.init();
         auto = new SendableChooser();
         auto.addDefault("center", new CenterAuto());
 //        auto.addObject("left", new leftAuto());
@@ -92,49 +93,22 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(Robot.Lift);
 		SmartDashboard.putString("Camera Direction:", "Forward");
 		dashboard();
-		camInit();
-		start();
+//		camInit();
+//		start();
 //        LiftActive.whileActive(new DisableDrive());
         
         
     }
     
-    public static void camInit() {
-		server = CameraServer.getInstance();
-		System.out.println("created server");
-		front = new UsbCamera("cam0", "/dev/video0");
-		rear = new UsbCamera("cam1", "/dev/video1");
-		current = front;
-		System.out.println("created cam0, cam1; set current cam to 0");
-		server.addCamera(front);
-		server.addCamera(rear);
-		System.out.println("added cameras to server");
-    }
-    
-    public static void start() {
-		server.startAutomaticCapture(current);
-	}
-    
-    public static void changeCameraTo(String cam) {
-		if (cam == "front") {
-			rear.free();
-			rear = new UsbCamera("cam1", "/dev/video1");
-			front = new UsbCamera("cam0", "/dev/video0");
-			current = front;
-		}
-		if (cam == "rear") {
-			front.free();
-			front = new UsbCamera("cam1", "/dev/video0");
-			rear = new UsbCamera("cam0", "/dev/video1");
-			current = rear;
-		}
-		start();
-	}
     
     public void dashboard() {
     	SmartDashboard.putNumber("range:", autoVars.getRange());
 		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
 		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
+		SmartDashboard.putNumber("Current0:", Robot.pdp.getCurrent(2));
+		SmartDashboard.putNumber("Current1:", Robot.pdp.getCurrent(3));
+		SmartDashboard.putNumber("Current2:", Robot.pdp.getCurrent(13));
+		SmartDashboard.putNumber("Current3:", Robot.pdp.getCurrent(12));
     }
     
     public static void camera() {

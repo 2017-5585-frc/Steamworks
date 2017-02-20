@@ -21,8 +21,8 @@ public class OI {
     	liftOnButton = new JoystickButton(xbox, 5);
     	liftOffButton = new JoystickButton(xbox, 6);
     	preciseDriveButton = new JoystickButton(joystick,1);
-    	frontCameraButton = new JoystickButton(joystick,7);
-    	rearCameraButton = new JoystickButton(joystick,8);
+    	frontCameraButton = new JoystickButton(joystick,5);
+    	rearCameraButton = new JoystickButton(joystick,3);
     	stopButton = new JoystickButton(joystick,2);
     	
     	
