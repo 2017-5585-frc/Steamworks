@@ -23,7 +23,7 @@ public class autoDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Drivetrain.manual(0, 1);
+    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -30,18 +30,18 @@ public class DriveTrain extends Subsystem {
     	double speed = OI.joystick.getThrottle() * -0.1 + 0.9;
     	double x = OI.joystick.getX() * -speed;
     	double y = OI.joystick.getY() * -speed;
-    	drivetrain.arcadeDrive(y, x);
+    	drivetrain.arcadeDrive(y, x, true);
     }
     
     public void preciseDrive() {
     	//drive at 50% power
     	double x = OI.joystick.getX() / -2;
     	double y = OI.joystick.getY() / -2;
-    	drivetrain.arcadeDrive(y, x);
+    	drivetrain.arcadeDrive(y, x, true);
     }
     
     public void manual(double x, double y) {
-    	drivetrain.arcadeDrive(y,x);
+    	drivetrain.drive(y,x);
     }
     
     public void stop() {

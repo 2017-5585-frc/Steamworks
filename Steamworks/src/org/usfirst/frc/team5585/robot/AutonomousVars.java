@@ -14,6 +14,8 @@ public class AutonomousVars {
 	private double range;
 	private double distanceTraveled;
 	
+	public final double turnConst = -0.1; // constant to add to auto turn values to adjust for drift.
+	
 	public void init() {
 		loopsRun = 0;
 		distanceTraveled = 0;
