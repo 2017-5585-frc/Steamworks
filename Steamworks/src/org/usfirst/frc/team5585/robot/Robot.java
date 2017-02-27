@@ -36,7 +36,6 @@ public class Robot extends IterativeRobot {
 	
 	public static PowerDistributionPanel pdp;
 	
-	public static Dashboard dashboard;
 	public static AutonomousVars autoVars;
 	
 	public Command ArcadeDrive;
