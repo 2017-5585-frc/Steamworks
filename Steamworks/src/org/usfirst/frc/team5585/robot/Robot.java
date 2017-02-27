@@ -7,8 +7,6 @@ import org.usfirst.frc.team5585.robot.Server17;
 import org.usfirst.frc.team5585.robot.subsystems.*;
 import org.usfirst.frc.team5585.robot.triggers.LiftActive;
 
-//import edu.wpi.cscore.UsbCamera;
-//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +21,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
+ * This is the root file of the robot project. All code is initialized and called from this file.
+ * @author Ian Bolin
  */
 public class Robot extends IterativeRobot {
 	
@@ -52,65 +53,61 @@ public class Robot extends IterativeRobot {
 	public Command autoCommand;
 	
 	public static Server17 server;
-	
-//	private static CameraServer camServer;
-//	private static UsbCamera front, rear, current;
-	
+		
     SendableChooser auto;
     
-//    public static Server17 camServer;
+
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * This function is run when the robot is first started up and contains
+     * or calls any initialization code.
      */
     public void robotInit() {
-		RobotMap.init();
-		autoVars = new AutonomousVars();
+		RobotMap.init(); // always call FIRST, otherwise, code may not be initialized. This will cause a null pointer exception.
+		autoVars = new AutonomousVars(); // subsystems
 	    Drivetrain = new DriveTrain();
 	    Lift = new Lift();
 	    Gimble = new CameraGimble();
-	    LiftActive = new LiftActive();
+	    LiftActive = new LiftActive(); // triggers
 	    
-	    pdp = new PowerDistributionPanel();
-//	    CameraServer.getInstance().startAutomaticCapture();
-//	    CameraServer.getInstance().startAutomaticCapture(1);
-	    Server17.init();
-        auto = new SendableChooser();
+	    pdp = new PowerDistributionPanel(); // other objects
+
+	    Server17.init(); // camera server
+        auto = new SendableChooser(); // auto chooser code
         auto.addDefault("center", new CenterAuto());
-//        auto.addObject("left", new leftAuto());
-//        auto.addObject("right", new rightAuto());
         auto.addObject("baseline", new baselineAuto());
         SmartDashboard.putData("Autonomous program", auto);
-        oi = new OI();
+        oi = new OI(); // init operator interface
         oi.preciseDriveButton.toggleWhenActive(new PreciseDrive());
         oi.liftOnButton.toggleWhenActive(new RunLift());
         oi.frontCameraButton.whenReleased(new switchCameraToFront());
         oi.rearCameraButton.whenReleased(new switchCameraToRear());
         oi.stopButton.whenPressed(new DisableDrive());
-        SmartDashboard.putData(Scheduler.getInstance());
+        SmartDashboard.putData(Scheduler.getInstance()); // init smartdashboard
 		SmartDashboard.putData(Robot.Drivetrain);
 		SmartDashboard.putData(Robot.Lift);
 		SmartDashboard.putString("Camera Direction:", "Forward");
 		dashboard();
-//		camInit();
-//		start();
-//        LiftActive.whileActive(new DisableDrive());
-        
-        
     }
     
-    
+    /**
+     * this function operates the smart dashboard, and updates the displayed values every time it is run
+     */
     public void dashboard() {
     	SmartDashboard.putNumber("range:", autoVars.getRange());
 		SmartDashboard.putNumber("Voltage:", Robot.pdp.getVoltage());
 		SmartDashboard.putNumber("Current:", Robot.pdp.getTotalCurrent());
-		SmartDashboard.putNumber("Current0:", Robot.pdp.getCurrent(2));
+		SmartDashboard.putNumber("Current0:", Robot.pdp.getCurrent(2)); // drive motors, change channels as necessary.
 		SmartDashboard.putNumber("Current1:", Robot.pdp.getCurrent(3));
 		SmartDashboard.putNumber("Current2:", Robot.pdp.getCurrent(13));
 		SmartDashboard.putNumber("Current3:", Robot.pdp.getCurrent(12));
     }
     
+    /**
+     * this function operates the smart dashboard camera direction widget.
+     * candidate for merging with dashboard()
+     * @see dashboard()
+     */
     public static void camera() {
 		String Direction = SmartDashboard.getString("Camera Direction", "Forward");
 		if (Direction == "Forward") {
@@ -127,7 +124,6 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-//    	boolean disabled = true;
     }
 	
 	public void disabledPeriodic() {
@@ -144,19 +140,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autoCommand = (Command) auto.getSelected();
-//        autoCommand.start();
-//		 String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-//		switch(autoSelected) {
-//		case "My Auto":
-//			autonomousCommand = new MyAutoCommand();
-//			break;
-//		case "Default Auto":
-//		default:
-//			break;
-//		} 
-    	
-    	// schedule the autonomous command (example)
+        autoCommand = (Command) auto.getSelected(); // start autonomous command
         if (autoCommand != null) autoCommand.start();
     }
 
@@ -166,7 +150,10 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     }
-
+    
+    /**
+     * This function is called once when Teleop starts.
+     */
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
