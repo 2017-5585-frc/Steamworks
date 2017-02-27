@@ -8,18 +8,21 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * for simplicity, all devices are created as objects in this class, and imported to subsystems as necessary.
+ * all REAL non sensor objects are Static, eliminating multiple instances of the same actuator.
  */
 public class RobotMap {
 	
 	//joysticks
-	public static int joystickPort = 0;
-	public static int xboxport =1;
+	public static final int joystickPort = 0;
+	public static final int xboxport =1;
 	//lift
 	public static SpeedController liftMotor;
 	public static DigitalInput liftSW;
@@ -31,28 +34,22 @@ public class RobotMap {
 	
 	public static AnalogInput rangeFinder;
 	
+	/**
+	 * inits objects, should be called FIRST, to avoid initing subsystems before components.
+	 */
 	public static void init() {
 		//lift
         liftSW = new DigitalInput(1);
-
-//        LiveWindow.addSensor("Lift", "liftSW", liftSW);
         
         liftMotor = new VictorSP(4);
+        LiveWindow.addActuator("LiftSystem", "motor", (LiveWindowSendable) liftMotor); // groups separately from drive motors. avoids accidental operation.
         liftMotor.setInverted(false);
-//        LiveWindow.addActuator("lift", "Lift Speed Controller / Motor", (VictorSP) liftMotor);
         
         //drivetrain
         frontLeftDriveMotor = new Victor(3);
-//        LiveWindow.addActuator("drivetrain", "front left drive motor", (Victor) frontLeftDriveMotor);
-        
         frontRightDriveMotor = new Victor(1);
-//        LiveWindow.addActuator("drivetrain", "front right drive motor", (Victor) frontRightDriveMotor);
-        
         rearLeftDriveMotor = new Victor(2);
-//        LiveWindow.addActuator("drivetrain", "rear left drive motor", (Victor) rearLeftDriveMotor);
-        
         rearRightDriveMotor = new Victor(0);
-//        LiveWindow.addActuator("drivetrain", "rear right drive motor", (Victor) rearRightDriveMotor);
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
         
