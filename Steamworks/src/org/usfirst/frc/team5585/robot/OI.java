@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  * Contains joystick objects, and joystickbutton objects.
+ * @author Ian Bolin
  */
 public class OI {
 	public static Joystick joystick, xbox;
