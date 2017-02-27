@@ -30,7 +30,6 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain Drivetrain;
 	public static Lift Lift;
-	public static CameraGimble Gimble;
 	public static OI oi;
 	public static LiftActive LiftActive;
 	
@@ -66,7 +65,6 @@ public class Robot extends IterativeRobot {
 		autoVars = new AutonomousVars(); // subsystems
 	    Drivetrain = new DriveTrain();
 	    Lift = new Lift();
-	    Gimble = new CameraGimble();
 	    LiftActive = new LiftActive(); // triggers
 	    
 	    pdp = new PowerDistributionPanel(); // other objects

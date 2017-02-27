@@ -10,7 +10,6 @@ public class changeCameraDirection extends Command {
 
     public changeCameraDirection() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.Gimble);
     	
     }
 
@@ -29,7 +28,6 @@ public class changeCameraDirection extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.Gimble.setDirection();
     	Robot.camera();
     }
 

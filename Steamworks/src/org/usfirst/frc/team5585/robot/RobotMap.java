@@ -22,25 +22,20 @@ public class RobotMap {
 	
 	//joysticks
 	public static final int joystickPort = 0;
-	public static final int xboxport =1;
+	public static final int xboxport = 1;
 	//lift
 	public static SpeedController liftMotor;
-	public static DigitalInput liftSW;
 	//drivetrain
 	public static SpeedController frontLeftDriveMotor, frontRightDriveMotor, rearLeftDriveMotor, rearRightDriveMotor;
 	public static RobotDrive drivetrain;
-	//CameraGimble
-	public static Servo Xservo, Yservo;
-	
+	// rangefinder
 	public static AnalogInput rangeFinder;
 	
 	/**
 	 * inits objects, should be called FIRST, to avoid initing subsystems before components.
 	 */
 	public static void init() {
-		//lift
-        liftSW = new DigitalInput(1);
-        
+		//lift        
         liftMotor = new VictorSP(4);
         LiveWindow.addActuator("LiftSystem", "motor", (LiveWindowSendable) liftMotor); // groups separately from drive motors. avoids accidental operation.
         liftMotor.setInverted(false);
@@ -53,13 +48,7 @@ public class RobotMap {
         
         drivetrain = new RobotDrive(frontLeftDriveMotor, rearLeftDriveMotor, frontRightDriveMotor, rearRightDriveMotor);
         
-        //CameraGimble
-        Xservo = new Servo(5);
-        LiveWindow.addActuator("Camera servo", "X", Xservo);
-        
-        Yservo = new Servo(6);
-        LiveWindow.addActuator("Camera servo", "Y", Yservo);
-        
+        // rangefinder
         rangeFinder = new AnalogInput(0);
         
 	}

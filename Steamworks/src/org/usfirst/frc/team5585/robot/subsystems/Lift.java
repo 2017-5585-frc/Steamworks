@@ -18,7 +18,6 @@ public class Lift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public SpeedController liftMotor = RobotMap.liftMotor;
-	public DigitalInput liftSW = RobotMap.liftSW;
 	public boolean active = false;
 	
 	public void opControl() {
