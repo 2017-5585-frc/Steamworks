@@ -3,22 +3,25 @@ package org.usfirst.frc.team5585.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
+ * Contains joystick objects, and joystickbutton objects.
  */
 public class OI {
 	public static Joystick joystick, xbox;
 	
     public Button liftOnButton, liftOffButton, preciseDriveButton, frontCameraButton, rearCameraButton, stopButton;
     
-    
+    /**
+     * This method initializes the OI class.
+     */
     public OI() {
-        joystick = new Joystick(RobotMap.joystickPort);
-        xbox = new Joystick(RobotMap.xboxport);
+        joystick = new Joystick(RobotMap.joystickPort); //joysticks
+        xbox = new Joystick(RobotMap.xboxport); //possibly use new wpilib.getIsXbox() to make this dynamic next year.
         
-    	liftOnButton = new JoystickButton(xbox, 5);
+    	liftOnButton = new JoystickButton(xbox, 5); //joystick buttons
     	liftOffButton = new JoystickButton(xbox, 6);
     	preciseDriveButton = new JoystickButton(joystick,1);
     	frontCameraButton = new JoystickButton(joystick,5);
