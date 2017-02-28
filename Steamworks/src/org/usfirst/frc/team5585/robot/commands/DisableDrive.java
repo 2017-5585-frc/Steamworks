@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * disables the robot drive.
  */
 public class DisableDrive extends Command {
 
