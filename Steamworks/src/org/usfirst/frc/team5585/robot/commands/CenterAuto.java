@@ -3,7 +3,7 @@ package org.usfirst.frc.team5585.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *command group to score on the center gear peg.
  */
 public class CenterAuto extends CommandGroup {
     
@@ -12,7 +12,7 @@ public class CenterAuto extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
