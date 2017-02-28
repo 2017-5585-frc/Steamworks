@@ -8,31 +8,31 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *Drivetrain subsystem
- * @since 2/7/2017
+ * Drivetrain subsystem. Controls a 6 wheeled, quad cim drivetrain. <br>
+ * written 2/7/2017
  * @author Ian Bolin
  * @category subsystem
  * @see #arcadeDrive()
  * @see #manual(double, double)
- * @see 
+ * @see #preciseDrive()
  */
 public class DriveTrain extends Subsystem {
     private RobotDrive drivetrain = RobotMap.drivetrain;
     
-    public void init() {
-    	
-    }
-    
-    public void arcadeDrive() {
-    /*
-     * default arcade drive method
+    /**
+     * Default arcade drive method.
+     * Uses joystick throttle to scale sensitivity and max output.
      */
-    	double speed = OI.joystick.getThrottle() * -0.1 + 0.9;
-    	double x = OI.joystick.getX() * -speed;
+    public void arcadeDrive() {
+    	double speed = OI.joystick.getThrottle() * -0.1 + 0.9; //scaling var
+    	double x = OI.joystick.getX() * -speed; //scale and set x and y
     	double y = OI.joystick.getY() * -speed;
-    	drivetrain.arcadeDrive(y, x, true);
+    	drivetrain.arcadeDrive(y, x, true); // pass x and y to drivetrain
     }
     
+    /**
+     * Operates drive at half power.
+     */
     public void preciseDrive() {
     	//drive at 50% power
     	double x = OI.joystick.getX() / -2;
@@ -40,10 +40,18 @@ public class DriveTrain extends Subsystem {
     	drivetrain.arcadeDrive(y, x, true);
     }
     
+    /**
+     * Manually operates the drivetrain.
+     * @param x - x axis factor, ie. turn
+     * @param y - y axis factor, ie. drive
+     */
     public void manual(double x, double y) {
     	drivetrain.drive(y,x);
     }
     
+    /**
+     * Stops the drivetrain.
+     */
     public void stop() {
     	drivetrain.stopMotor();
     }
@@ -53,7 +61,7 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new ArcadeDrive());
+    	setDefaultCommand(new ArcadeDrive()); //automatically run arcade drive when nothing else is using the drivetrain.
     }
 }
 
