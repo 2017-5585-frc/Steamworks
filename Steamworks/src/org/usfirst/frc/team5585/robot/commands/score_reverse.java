@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * drives backward away from the gear peg.
  */
 public class score_reverse extends Command {
 
