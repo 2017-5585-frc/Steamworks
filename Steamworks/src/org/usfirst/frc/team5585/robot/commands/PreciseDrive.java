@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * runs the precise drive method in the drivetrain subsystem.
  */
 public class PreciseDrive extends Command {
 
