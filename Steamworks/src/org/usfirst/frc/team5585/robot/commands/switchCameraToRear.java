@@ -6,7 +6,7 @@ import org.usfirst.frc.team5585.robot.Server17;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * switches the camera to the rear camera (as defined by server 17)
  */
 public class switchCameraToRear extends Command {
 
