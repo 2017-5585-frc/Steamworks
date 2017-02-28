@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * calls the op control method of the lift subsystem.
  */
 public class RunLift extends Command {
 
