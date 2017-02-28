@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * subsidiary auto command. used by center auto. drives strait forward until ultrasonic sensor activates.
  */
 public class score_forward extends Command {
 
