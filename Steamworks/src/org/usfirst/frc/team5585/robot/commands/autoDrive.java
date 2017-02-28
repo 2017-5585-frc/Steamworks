@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * drives the robot forward for a set time.
  */
 public class autoDrive extends Command {
 
@@ -17,7 +17,7 @@ public class autoDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.setTimeout(4);
+    	this.setTimeout(4); //sets the timeout on the command, ie 4 seconds.
     	Robot.autoVars.setStartTime();
     }
 
