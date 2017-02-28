@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5585.robot.Robot;
 
 /**
- *
+ * Changes the camera direction widget on the smartdashboard.
  */
 public class changeCameraDirection extends Command {
 
