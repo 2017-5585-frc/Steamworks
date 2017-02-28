@@ -5,7 +5,7 @@ import org.usfirst.frc.team5585.robot.Robot;
 import org.usfirst.frc.team5585.robot.Server17;
 
 /**
- *
+ * switches the camera to the front camera (as defined by server 17)
  */
 public class switchCameraToFront extends Command {
 
