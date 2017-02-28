@@ -3,7 +3,7 @@ package org.usfirst.frc.team5585.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * command group to score over the baseline.
  */
 public class baselineAuto extends CommandGroup {
     
