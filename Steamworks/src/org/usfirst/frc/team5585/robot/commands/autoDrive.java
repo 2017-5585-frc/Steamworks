@@ -17,13 +17,13 @@ public class autoDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.setTimeout(4); //sets the timeout on the command, ie 4 seconds.
+    	this.setTimeout(3); //sets the timeout on the command, ie 4 seconds.
     	Robot.autoVars.setStartTime();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 1);
+    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 0.7);
     }
 
     // Make this return true when this Command no longer needs to run execute()
