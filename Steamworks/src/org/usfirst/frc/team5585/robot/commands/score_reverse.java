@@ -17,18 +17,18 @@ public class score_reverse extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.setTimeout(2);
+    	this.setTimeout(1);
     	Robot.autoVars.setStartTime();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Drivetrain.manual(0.1, -1);
+    	Robot.Drivetrain.manual(Robot.autoVars.turnConst, -1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.autoVars.getTimeRemaining(0.2) <= 0) {
+    	if (Robot.autoVars.getTimeRemaining(0.5) <= 0) {
     		return true;
     	}
     	else {

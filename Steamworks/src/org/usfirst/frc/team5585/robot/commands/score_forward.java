@@ -17,13 +17,13 @@ public class score_forward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.setTimeout(2);
+    	this.setTimeout(3);
     	Robot.autoVars.setStartTime();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 0.5);
+    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 0.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()

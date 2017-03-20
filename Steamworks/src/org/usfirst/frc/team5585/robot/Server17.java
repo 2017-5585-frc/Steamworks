@@ -23,7 +23,7 @@ public class Server17 {
 		stream = server.getServer("current"); //creates an easy access var for the mjpeg server
 		System.out.println("created server");
 		front = new UsbCamera("cam0", "/dev/video0"); // create camera one
-		front.setResolution(320, 20);
+		front.setResolution(320, 240);
 		front.setFPS(25);
 		
 		rear = new UsbCamera("cam1", "/dev/video1"); // create camera two

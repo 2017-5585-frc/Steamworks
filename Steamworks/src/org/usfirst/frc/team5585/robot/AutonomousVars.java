@@ -20,7 +20,7 @@ public class AutonomousVars {
 	private double range;
 	private double distanceTraveled;
 	
-	public final double turnConst = -0.05; // constant to add to auto turn values to adjust for drift.
+	public final double turnConst = -0.02; // constant to add to auto turn values to adjust for drift.
 	
 	/**
 	 * inits class, goes in roboinit or autoinit.

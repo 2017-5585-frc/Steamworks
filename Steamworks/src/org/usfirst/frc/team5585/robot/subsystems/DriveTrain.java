@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
      * Uses joystick throttle to scale sensitivity and max output.
      */
     public void arcadeDrive() {
-    	double speed = OI.joystick.getThrottle() * -0.1 + 0.9; //scaling var
+    	double speed = OI.joystick.getThrottle() * -0.2 + 0.8; //scaling var
     	double x = OI.joystick.getX() * -speed; //scale and set x and y
     	double y = OI.joystick.getY() * -speed;
     	drivetrain.arcadeDrive(y, x, true); // pass x and y to drivetrain

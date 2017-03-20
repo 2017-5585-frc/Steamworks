@@ -23,12 +23,12 @@ public class autoDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 0.7);
+    	Robot.Drivetrain.manual(0+Robot.autoVars.turnConst, 0.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.autoVars.getTimeRemaining(2) <= 0) {
+    	if (Robot.autoVars.getTimeRemaining(1.6) <= 0) {
     		return true;
     	}
     	else {
